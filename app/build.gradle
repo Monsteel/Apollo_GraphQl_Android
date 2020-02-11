@@ -9,6 +9,9 @@ apply plugin: 'com.apollographql.android'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
+    kotlinOptions{
+        jvmTarget = "1.8"
+    }
     defaultConfig {
         applicationId "kr.hs.dgsw.personer.apollo_graphql_android"
         minSdkVersion 21

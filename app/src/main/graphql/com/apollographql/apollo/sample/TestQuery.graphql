@@ -1,0 +1,11 @@
+query TestQuery($login: String!, $name: String!){
+  user(login: $login) {
+    name
+    location
+    company
+    createdAt
+    repository(name: $name) {
+      createdAt
+    }
+  }
+}
