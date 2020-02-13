@@ -1,6 +1,12 @@
 package kr.hs.dgsw.personer.apollo_graphql_android
 
 import com.apollographql.apollo.ApolloClient
+import com.apollographql.apollo.ApolloQueryCall
+import com.apollographql.apollo.api.Operation
+import com.apollographql.apollo.api.Query
+import com.apollographql.apollo.api.Response
+import com.apollographql.apollo.rx2.rxQuery
+import io.reactivex.Observable
 import kr.hs.dgsw.smartschool.dodamdodam_teacher.util.Constants
 import okhttp3.OkHttpClient
 
@@ -11,11 +17,11 @@ object Utils {
     private val builder = OkHttpClient.Builder()
     private var APOLLO = ApolloClient.builder().serverUrl(BASE_URL)
 
-    fun getApollo(token:String): ApolloClient {
-        return APOLLO.okHttpClient(getClient(token)).build()
-    }
-    fun getApollo(): ApolloClient {
-        return APOLLO.okHttpClient(getClient()).build()
+//    fun  getApolloClient(token:String, query: ):  {
+//        return APOLLO.okHttpClient(getClient(token)).
+//    }
+    fun <T,D : Operation.Data?,V : Operation.Variables?> getApollo(token: String, query: Query<D, T, V>): ApolloQueryCall<T>? {
+        return APOLLO.okHttpClient(getClient(token)).build().query(query)
     }
 
     private fun getClient(token:String): OkHttpClient {
